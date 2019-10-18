@@ -19,9 +19,12 @@ public class Review {
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 
-    @OneToMany(orphanRemoval=true)
+    @OneToMany(orphanRemoval=true, cascade = CascadeType.ALL)
     @JoinColumn(name="REVIEW_ID")
     private List<Comment> comments;
+
+    @Column(name = "PRODUCT_ID")
+    private int productId;
 
     public int getId() {
         return id;
@@ -45,5 +48,13 @@ public class Review {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }

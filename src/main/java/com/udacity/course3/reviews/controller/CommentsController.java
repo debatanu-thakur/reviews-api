@@ -41,6 +41,7 @@ public class CommentsController {
         Review review;
         try {
             review = reviewRepo.findById(reviewId).orElseThrow(() -> new Exception("Review not found for " + reviewId.toString()));
+            comment.setReviewId(reviewId);
             commentRepo.save(comment);
         } catch (Exception ex) {
             ex.printStackTrace();

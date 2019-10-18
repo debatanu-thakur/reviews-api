@@ -25,6 +25,8 @@ public class Comment {
     @Column(name = "REVIEW_COMMENT")
     private String reviewComment;
 
+    @Column(name = "REVIEW_ID")
+    private int reviewId;
 
     public String getReviewComment() {
         return reviewComment;
@@ -56,5 +58,13 @@ public class Comment {
 
     public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
+    }
+
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 }

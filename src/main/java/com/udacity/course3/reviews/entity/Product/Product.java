@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(orphanRemoval=true)
+    @OneToMany(orphanRemoval=true, cascade = CascadeType.ALL)
     @JoinColumn(name="PRODUCT_ID")
     private List<Review> reviews;
 

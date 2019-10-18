@@ -30,8 +30,8 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public void createProduct(@RequestBody Product product) {
+        productRepo.save(product);
     }
 
     /**
