@@ -1,10 +1,14 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.entity.Product.Product;
+import com.udacity.course3.reviews.entity.Product.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +19,8 @@ import java.util.List;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
+    @Autowired
+    ProductRepository productRepo;
 
     /**
      * Creates a product.
@@ -36,7 +42,13 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        Product prod;
+        try {
+            prod = productRepo.findById(id).orElseThrow(() -> new Exception("Product not found " + id));
+        } catch (Exception ex) {
+            return new ResponseEntity(new ArrayList(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Product>(prod, HttpStatus.FOUND);
     }
 
     /**
