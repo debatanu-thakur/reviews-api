@@ -60,10 +60,6 @@ public class Comment {
         this.modifiedAt = modifiedAt;
     }
 
-    public int getReviewId() {
-        return reviewId;
-    }
-
     public void setReviewId(int reviewId) {
         this.reviewId = reviewId;
     }

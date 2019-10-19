@@ -26,6 +26,9 @@ public class Review {
     @Column(name = "PRODUCT_ID")
     private int productId;
 
+    @Column(name = "TITLE")
+    private String title;
+
     public int getId() {
         return id;
     }
@@ -50,11 +53,15 @@ public class Review {
         this.comments = comments;
     }
 
-    public int getProductId() {
-        return productId;
-    }
-
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
