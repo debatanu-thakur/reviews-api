@@ -1,4 +1,3 @@
-USE reviews;
 CREATE TABLE tbl_product
 (
     ID INT NOT NULL AUTO_INCREMENT,
