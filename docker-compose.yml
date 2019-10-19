@@ -9,11 +9,19 @@ services:
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=rootpassword
     ports:
-      - '3306:3306'
-    expose:
-      - '3306'
+      - 3306:3306
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+  app:
+    build: ./
+    ports:
+      - 8100:8100
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
