@@ -40,14 +40,14 @@ public class ReviewsController {
      * @return The created review or 404 if product id is not found.
      */
     @PostMapping(value = "/reviews/products/{productId}")
-    public ResponseEntity<?> createReviewForProduct(@PathVariable("productId") Integer productId, @RequestBody Review review) {
+    public ResponseEntity<?> createReviewForProduct(@PathVariable("productId") Integer productId, @Valid @RequestBody Review review) {
         Product prod;
         try {
             prod = productRepo.findById(productId).orElseThrow(() -> new Exception("Product not found " + productId));
             review.setProductId(productId);
             reviewRepo.save(review);
         } catch (Exception ex) {
-            return new ResponseEntity(new ArrayList(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new ArrayList().add(ex.getMessage()), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity(null, HttpStatus.CREATED);

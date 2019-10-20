@@ -21,7 +21,7 @@ public class ReviewsApplication {
 			@Value("${spring.datasource.password}") String password
 	) {
 		return args -> {
-			if(!url.equals(null)) {
+			if(!url.equals(null) && !url.equals("")) {
 				Flyway flyway = Flyway.configure().dataSource(url, username, password).load();
 				flyway.migrate();
 			}
