@@ -3,6 +3,8 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.entity.Product.Product;
 import com.udacity.course3.reviews.entity.Product.ProductRepository;
 import com.udacity.course3.reviews.entity.Review.Review;
+import com.udacity.course3.reviews.entity.Review.ReviewMongoDB;
+import com.udacity.course3.reviews.entity.Review.ReviewMongoRepository;
 import com.udacity.course3.reviews.entity.Review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,9 @@ public class ReviewsController {
     // TODO: Wire JPA repositories here
     @Autowired
     private ReviewRepository reviewRepo;
+
+    @Autowired
+    private ReviewMongoRepository reviewMongoRepository;
 
     @Autowired
     private ProductRepository productRepo;
@@ -73,4 +78,25 @@ public class ReviewsController {
 
         return new ResponseEntity<List<Review>>(reviews, HttpStatus.FOUND);
     }
+
+    /**
+     * Lists reviews by product.
+     *
+     * @param productId The id of the product.
+     * @return The list of reviews from mongodb
+     */
+    @GetMapping(value = "/reviews_mongodb/products/{productId}")
+    public ResponseEntity<?> getReviewsForProduct(@PathVariable("productId") Integer productId) {
+        Product prod;
+        List<ReviewMongoDB> reviews;
+        try {
+            prod = productRepo.findById(productId).orElseThrow(() -> new Exception("Product not found - " +productId));
+            reviews = reviewMongoRepository.findByProductId(productId);
+        } catch (Exception ex) {
+            return new ResponseEntity(new ArrayList().add(ex.getMessage()), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<ReviewMongoDB>>(reviews, HttpStatus.FOUND);
+    }
+
+
 }

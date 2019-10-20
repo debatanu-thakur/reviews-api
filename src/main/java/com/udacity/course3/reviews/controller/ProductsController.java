@@ -58,7 +58,7 @@ public class ProductsController {
      * @return The list of products.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<?> listProducts() {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> listProducts() {
+        return new ResponseEntity(productRepo.findAll(), HttpStatus.OK);
     }
 }

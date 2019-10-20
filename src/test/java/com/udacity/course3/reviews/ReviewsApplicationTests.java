@@ -63,6 +63,12 @@ public class ReviewsApplicationTests {
 	}
 
 	@Test
+	public void getAllProducts() throws Exception {
+		List<Product> prodExisting = productRepository.findAll();
+		assertThat(prodExisting.size()).isGreaterThan(0);
+	}
+
+	@Test
 	public void createReview() throws Exception {
 		Product prodExist = productRepository.findById(1).orElse(new Product());
 		Review review = new Review();
