@@ -28,22 +28,6 @@ public class ReviewsApplication {
 			if (!url.equals(null) && !url.equals("")) {
 				Flyway flyway = Flyway.configure().dataSource(url, username, password).load();
 				flyway.migrate();
-//				try {
-//
-//					reviewMongoRepository.deleteAll();
-//					productRepository.findAll().forEach(prod -> {
-//						ReviewMongoDB rev = new ReviewMongoDB();
-//						prod.getReviews().forEach(r -> {
-//							rev.setComments(r.getComments());
-//							rev.setCreatedAt(r.getCreatedAt());
-//							rev.setProductId(prod.getId());
-//							rev.setTitle(r.getTitle());
-//							reviewMongoRepository.save(rev);
-//						});
-//					});
-//				} catch (Exception ex) {
-//					ex.printStackTrace();
-//				}
 			}
 		};
 	}
