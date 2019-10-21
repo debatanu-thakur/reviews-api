@@ -8,7 +8,7 @@ The features include
 ## How To Run
 1. Have Java 1.8 installed
 2. Have maven package installed
-3. Clone the repository first and checkout the branch
+3. Clone the repository first and checkout the branch develop-final
     ```$cmd
     git clone https://github.com/debatanu-thakur/reviews-api.git
     ```
