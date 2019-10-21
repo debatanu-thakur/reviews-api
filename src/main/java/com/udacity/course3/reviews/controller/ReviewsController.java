@@ -98,5 +98,32 @@ public class ReviewsController {
         return new ResponseEntity<List<ReviewMongoDB>>(reviews, HttpStatus.FOUND);
     }
 
+    /**
+     * Creates a review for a product using mongodb.
+     * <p>
+     * 1. Add argument for review entity. Use {@link RequestBody} annotation.
+     * 2. Check for existence of product.
+     * 3. If product not found, return NOT_FOUND.
+     * 4. If found, save review.
+     *
+     * @param productId The id of the product.
+     * @return The created review or 404 if product id is not found.
+     */
+    @PostMapping(value = "/reviews_mongodb/products/{productId}")
+    public ResponseEntity<?> createReviewForProductMongo(@PathVariable("productId") Integer productId, @Valid @RequestBody ReviewMongoDB review) {
+        Product prod;
+        try {
+            prod = productRepo.findById(productId).orElseThrow(() -> new Exception("Product not found " + productId));
+            review.setProductId(productId);
+            reviewMongoRepository.save(review);
+        } catch (Exception ex) {
+            return new ResponseEntity(new ArrayList().add(ex.getMessage()), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(null, HttpStatus.CREATED);
+
+    }
+
+
 
 }

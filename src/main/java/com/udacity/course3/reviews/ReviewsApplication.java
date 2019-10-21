@@ -18,11 +18,6 @@ public class ReviewsApplication {
 		SpringApplication.run(ReviewsApplication.class, args);
 	}
 
-	@Autowired
-	ProductRepository productRepository;
-	@Autowired
-	ReviewMongoRepository reviewMongoRepository;
-
 	@Bean
 	CommandLineRunner initDatabase(
 			@Value("${spring.datasource.url}") String url,
@@ -30,23 +25,25 @@ public class ReviewsApplication {
 			@Value("${spring.datasource.password}") String password
 	) {
 		return args -> {
-			if(!url.equals(null) && !url.equals("")) {
+			if (!url.equals(null) && !url.equals("")) {
 				Flyway flyway = Flyway.configure().dataSource(url, username, password).load();
 				flyway.migrate();
-				try {
-					productRepository.findAll().forEach(prod -> {
-						ReviewMongoDB rev = new ReviewMongoDB();
-						prod.getReviews().forEach(r -> {
-							rev.setComments(r.getComments());
-							rev.setCreatedAt(r.getCreatedAt());
-							rev.setProductId(prod.getId());
-							rev.setTitle(r.getTitle());
-							reviewMongoRepository.save(rev);
-						});
-					});
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
+//				try {
+//
+//					reviewMongoRepository.deleteAll();
+//					productRepository.findAll().forEach(prod -> {
+//						ReviewMongoDB rev = new ReviewMongoDB();
+//						prod.getReviews().forEach(r -> {
+//							rev.setComments(r.getComments());
+//							rev.setCreatedAt(r.getCreatedAt());
+//							rev.setProductId(prod.getId());
+//							rev.setTitle(r.getTitle());
+//							reviewMongoRepository.save(rev);
+//						});
+//					});
+//				} catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
 			}
 		};
 	}

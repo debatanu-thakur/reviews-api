@@ -5,11 +5,14 @@ import com.udacity.course3.reviews.entity.Comment.CommentRepository;
 import com.udacity.course3.reviews.entity.Product.Product;
 import com.udacity.course3.reviews.entity.Product.ProductRepository;
 import com.udacity.course3.reviews.entity.Review.Review;
+import com.udacity.course3.reviews.entity.Review.ReviewMongoRepository;
 import com.udacity.course3.reviews.entity.Review.ReviewRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 

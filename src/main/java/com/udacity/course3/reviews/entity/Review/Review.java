@@ -16,7 +16,7 @@ public class Review {
     private int id;
 
     @CreatedDate
-    @Column(name = "CREATED_AT")
+    @Column(name = "CREATED_AT", insertable=false)
     private LocalDateTime createdAt;
 
     @OneToMany(orphanRemoval=true, cascade = CascadeType.ALL)
@@ -51,6 +51,10 @@ public class Review {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public void setProductId(int productId) {

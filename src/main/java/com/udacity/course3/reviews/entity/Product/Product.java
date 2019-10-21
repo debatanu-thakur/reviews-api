@@ -18,11 +18,11 @@ public class Product {
     private int id;
 
     @CreatedDate
-    @Column(name = "CREATED_AT")
+    @Column(name = "CREATED_AT", insertable=false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "UPDATED_AT")
+    @Column(name = "UPDATED_AT", insertable=false)
     private LocalDateTime modifiedAt;
 
     @NotNull

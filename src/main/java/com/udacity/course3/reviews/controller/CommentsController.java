@@ -3,6 +3,8 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.entity.Comment.Comment;
 import com.udacity.course3.reviews.entity.Comment.CommentRepository;
 import com.udacity.course3.reviews.entity.Review.Review;
+import com.udacity.course3.reviews.entity.Review.ReviewMongoDB;
+import com.udacity.course3.reviews.entity.Review.ReviewMongoRepository;
 import com.udacity.course3.reviews.entity.Review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,7 @@ public class CommentsController {
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
     public ResponseEntity<?> createCommentForReview(@PathVariable("reviewId") Integer reviewId, @Valid @RequestBody Comment comment) {
         Review review;
+        ReviewMongoDB rev;
         try {
             review = reviewRepo.findById(reviewId).orElseThrow(() -> new Exception("Review not found for " + reviewId.toString()));
             comment.setReviewId(reviewId);

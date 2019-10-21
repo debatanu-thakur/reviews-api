@@ -37,6 +37,10 @@ public class ReviewMongoDB {
         this.comments = comments;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
     public void setProductId(int productId) {
         this.productId = productId;
     }
@@ -48,11 +52,23 @@ public class ReviewMongoDB {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getId() {
         return Id;
     }
 
     public void setId(String id) {
         Id = id;
+    }
+
+    public ReviewMongoDB() {
+
+    }
+
+    public  ReviewMongoDB(Review r) {
+        title = r.getTitle();
+        createdAt = r.getCreatedAt();
+        comments = r.getComments();
+
     }
 }
